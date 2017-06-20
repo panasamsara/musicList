@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="{%  url 'list:edit_action' %}" method="post">
+        {% csrf_token %}
+        <label> 歌曲名
+            <input type="text" name="sing_name">
+        </label>
+
+        <label> 歌手
+            <input type="text" name="sing_name">
+        </label>
+
+        <input type='submit'>
+
+    </form>
+</body>
+</html>
