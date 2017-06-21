@@ -1,0 +1,34 @@
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from . import models
+
+def index(request):
+    articles = models.Article.objects.all()
+    return render(request, 'list/index.html', {'articles': articles})
+
+def article_page(request, article_id):
+    article = models.Article.objects.get(pk=article_id)
+    return render(request, 'list/article_page.html', {'article': article})
+
+def edit_page(request, article_id):
+    if str(article_id) == '0':
+        return render(request, 'list/edit_page.html')
+    article = models.Article.objects.get(pk=article_id)
+    return render(request, 'list/edit_page.html', {'article': article})
+
+
+def edit_action(request):
+    article_id = request.POST.get('article_id', '0')
+    song_name = request.POST.get('song_name', '歌名')
+    singer = request.POST.get('singer', '歌手')
+    if article_id == "0":
+        models.Article.objects.create(song_name=song_name, singer=singer)
+        # articles = models.Article.objects.all()
+        # return render(request, 'list/index.html', {'articles': articles})
+        return HttpResponseRedirect('/blog/index')
+
+    article = models.Article.objects.get(pk=article_id)
+    article.song_name = song_name
+    article.singer = singer
+    article.save()
+    return render(request, 'list/article_page.html', {'article': article})
