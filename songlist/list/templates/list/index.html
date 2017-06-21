@@ -21,10 +21,13 @@
             border-radius: 5px;
             margin: 10px;
         }
+        .list_line{
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
-    <div  class="col-md-12">
+    <div class="col-md-12">
         <a href="{% url 'list:edit_page' 0 %}">新歌曲</a>  <br/>
         <div class="title">
             <span class="col-md-3 inline">歌曲</span>
@@ -32,7 +35,7 @@
             <span class="col-md-4 inline">时间</span>
         </div>
     {% for article in articles %}
-        <div>
+        <div class="list_line">
             <a class="col-md-3 inline" href="{% url 'list:article_page' article.id %}">{{article.song_name }}</a>
             <span class="col-md-3 inline">{{article.singer }}</span>
             <span class="col-md-4 inline">{{article.createTime|date:"Y-m-d" }}</span>
