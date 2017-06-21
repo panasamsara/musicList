@@ -14,8 +14,8 @@ def edit_page(request):
     return render(request, 'list/edit_page.html')
 
 def edit_action(request):
-    song_name = request.POST.get('song_name', 'song_name')
-    singer = request.POST.get('singer', 'singer')
+    song_name = request.POST.get('song_name', '歌名')
+    singer = request.POST.get('singer', '歌手')
     models.Article.objects.create(song_name=song_name, singer=singer)
     articles = models.Article.objects.all()
     return render(request, 'list/index.html', {'articles': articles})
