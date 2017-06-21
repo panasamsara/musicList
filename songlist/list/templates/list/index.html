@@ -7,7 +7,13 @@
 <body>
     <a href="{% url 'list:edit_page' 0 %}">新歌曲</a>  <br/>
     {% for article in articles %}
-    <a href="{% url 'list:article_page' article.id %}">{{article.song_name }}</a>
+    <div>
+
+        <a href="{% url 'list:article_page' article.id %}">{{article.song_name }}</a>
+        --<span>{{article.singer }}</span>
+         <span>{{article.createTime|date:"Y-m-d" }}</span>
+    </div>
+
     {% endfor %}
 </body>
 </html>
