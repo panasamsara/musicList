@@ -4,17 +4,18 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from . import models
 
 def index(request):
-    articles_list = models.Article.objects.all()
-    paginator = Paginator(articles_list, 25)# Show 25 contacts per page
-    page = request.GET.get('page')
-    try:
-        articles = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        articles = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        articles = paginator.page(paginator.num_pages)
+    # articles_list = models.Article.objects.all()
+    # paginator = Paginator(articles_list, 25)# Show 25 contacts per page
+    # page = request.GET.get('page')
+    # try:
+    #     articles = paginator.page(page)
+    # except PageNotAnInteger:
+    #     # If page is not an integer, deliver first page.
+    #     articles = paginator.page(1)
+    # except EmptyPage:
+    #     # If page is out of range (e.g. 9999), deliver last page of results.
+    #     articles = paginator.page(paginator.num_pages)
+    articles = models.Article.objects.all()
     return render(request, 'list/index.html', {'articles': articles})
 
 def article_page(request, article_id):
@@ -36,7 +37,7 @@ def edit_action(request):
         models.Article.objects.create(song_name=song_name, singer=singer)
         # articles = models.Article.objects.all()
         # return render(request, 'list/index.html', {'articles': articles})
-        return HttpResponseRedirect('/blog/index')
+        return HttpResponseRedirect('/list/index')
 
     article = models.Article.objects.get(pk=article_id)
     article.song_name = song_name
