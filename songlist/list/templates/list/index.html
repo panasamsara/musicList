@@ -47,6 +47,7 @@
         <div class="pagination">
             <span class="step-links">
                 {% if articles.has_previous %}
+                    <a href="?page=1">首页</a>
                     <a href="?page={{ articles.previous_page_number }}">上一页</a>
                 {% endif %}
 
@@ -67,6 +68,7 @@
 
                 {% if articles.has_next %}
                     <a href="?page={{ articles.next_page_number }}">下一页</a>
+                    <a href="?page={{ articles.paginator.num_pages }}">尾页</a>
                 {% endif %}
             </span>
         </div>
